@@ -1,4 +1,3 @@
-
 #include<time.h>
 #include <iostream>
 #include <cstdlib>
@@ -371,6 +370,7 @@ string Shoot(int BoardState[10][10],bool OnceInvalid,int Psunk[8]) {
 string BotShoot(int BoardState[10][10]) {
 	srand(time(0));
 	int X = rand() % 10;
+	tick(1000);
 	srand(time(0));
 	int Y = rand() % 10;
 	char falseY = Y + 'A';
@@ -396,7 +396,9 @@ void shipPlace(int BoardState[10][10],bool Bot) {
 	int shipType,X,Y;
 	int Horiz;
 	bool Valid = false;
-	printBoard(BoardState, false);
+	if (!Bot) {
+		printBoard(BoardState, false);
+	}
 	for (shipType = 3; shipType <= 7;shipType++) {
 		cout << "Placing ";
 		switch (shipType) {
@@ -457,7 +459,9 @@ void shipPlace(int BoardState[10][10],bool Bot) {
 			}
 		}
 		system("cls");
-		printBoard(BoardState, false);
+		if (!Bot) {
+			printBoard(BoardState, false);
+		}
 	}
 }
 
@@ -578,7 +582,7 @@ void PlayWithBot(int turn,int BoardState1[10][10],int BoardState2[10][10],int P1
 			cout << "     Bot:";
 			printBoard(BoardState2, true);
 			sinking(P2sunk, 2, true);
-			tick(3000);
+			tick(2000);
 			string Coords = BotShoot(BoardState1);
 			system("cls");
 			cout << "     Player:";
@@ -740,9 +744,7 @@ bool ChooseMode(bool OnceInvalid) {
 		system("cls");
 		shipPlace(BoardState2, true);
 		system("cls");
-		printBoard(BoardState2, false);
-		cout << "The Bot is Placing ships...";
-		tick(5000);
+		tick(1000);
 		system("cls");
 		PlayWithBot(1,BoardState1,BoardState2, P1sunk, P2sunk);
 	}
@@ -791,3 +793,8 @@ int main() {
 		ChooseMode(true);
 	}
 }
+// 800
+// lines
+// of
+// code
+//baby!!!!!!
